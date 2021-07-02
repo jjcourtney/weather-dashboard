@@ -13,72 +13,96 @@
 <body>
     <header>
       <h1>Welcome to Jon's weather forcast</h1>
-      <div>Serch for you town</div>
+
     </header>
-    <main id="main">
-      
 
+    <main>
+      <section id="search-container">
+        <div id="search">
+          <input type="text">
+          <button id="search-btn">search</button>
+        </div>
+        <div id="previous-searches">
+          <span class="prev-searched">Some City</span> 
+          <span class="prev-searched">Some City</span>  
+          <span class="prev-searched">Some City</span>  
+          <span class="prev-searched">Some City</span>  
+          <span class="prev-searched">Some City</span>  
+          <span class="prev-searched">Some City</span>  
+          <span class="prev-searched">Some City</span>  
+          <span class="prev-searched">Some City</span>  
+          <span class="prev-searched">Some City</span>  
+          <span class="prev-searched">Some City</span> 
 
-      <div id="main-card">
-        <div id="todays-day">Monday</div>
-        <div id="todays-info">
-          <div><img src="http://openweathermap.org/img/wn/10d@2x.png"></div>
-          <span id="today-max">Max: 25</span>
-          <span id="today-min">Min: 10</span>
-          <span id="today-wind">Wind: 23mph</span>
-          <span id="today-humidity">humi: 60%</span>
-          <span id="today-uv">UV: High</span>
+   
+        </div>
+      </section>
+      <section id="weather-display{">
+        <div id="main-card">
+          <div id="todays-day">Atlanta  - <span id="todays-date">Monday, 4th July</span></div>
+          <hr>
+          <div id="todays-info">
+            <div><img src="http://openweathermap.org/img/wn/10d@2x.png"></div>
+            <span id="today-max">Max: 25</span>
+            <span id="today-min">Min: 10</span>
+            <span id="today-wind">Wind: 23mph</span>
+            <span id="today-humidity">humi: 60%</span>
+            <span id="today-uv" class="severe-uv">UV: High</span>
+          </div>
+        </div>
+        <div class="five-day">
+          5 day forcast
+        </div>
+        <div id="container-daily-cards">
+          <div class="daily-card">
+            <p>Monday</p>
+            <hr>
+            <img src="http://openweathermap.org/img/wn/10d@2x.png">
+            <p>Max: 25</p>
+            <p>Min: 10</p>
+            <p>Wind: 23mph</p>
+            <p>humi: 60%</p>
+          </div>        
+          <div class="daily-card">
+            <p>Monday</p>
+            <hr>
+            <img src="http://openweathermap.org/img/wn/10d@2x.png">
+            <p>Max: 25</p>
+            <p>Min: 10</p>
+            <p>Wind: 23mph</p>
+            <p>humi: 60%</p>
+
+          </div>        
+          <div class="daily-card">
+            <p>Monday</p>
+            <hr>
+            <img src="http://openweathermap.org/img/wn/10d@2x.png">
+            <p>Max: 25</p>
+            <p>Min: 10</p>
+            <p>Wind: 23mph</p>
+            <p>humi: 60%</p>
+          </div>        
+          <div class="daily-card">
+            <p>Monday</p>
+            <hr>
+            <img src="http://openweathermap.org/img/wn/10d@2x.png">
+            <p>Max: 25</p>
+            <p>Min: 10</p>
+            <p>Wind: 23mph</p>
+            <p>humi: 60%</p>
+          </div>        
+          <div class="daily-card">
+            <p>Monday</p>
+            <hr>
+            <img src="http://openweathermap.org/img/wn/10d@2x.png">
+            <p>Max: 25</p>
+            <p>Min: 10</p>
+            <p>Wind: 23mph</p>
+            <p>humi: 60%</p>
+          </div>
 
         </div>
-      </div>
-      <div class="five-day">
-        5 day forcast
-      </div>
-      <div id="container-daily-cards">
-        <div class="daily-card">
-          <p>Monday</p>
-          <img src="http://openweathermap.org/img/wn/10d@2x.png">
-          <p>Max: 25</p>
-          <p>Min: 10</p>
-          <p>Wind: 23mph</p>
-          <p>humi: 60%</p>
-        </div>        
-        <div class="daily-card">
-          <p>Monday</p>
-          <img src="http://openweathermap.org/img/wn/10d@2x.png">
-          <p>Max: 25</p>
-          <p>Min: 10</p>
-          <p>Wind: 23mph</p>
-          <p>humi: 60%</p>
-
-        </div>        
-        <div class="daily-card">
-          <p>Monday</p>
-          <img src="http://openweathermap.org/img/wn/10d@2x.png">
-          <p>Max: 25</p>
-          <p>Min: 10</p>
-          <p>Wind: 23mph</p>
-          <p>humi: 60%</p>
-        </div>        
-        <div class="daily-card">
-          <p>Monday</p>
-          <img src="http://openweathermap.org/img/wn/10d@2x.png">
-          <p>Max: 25</p>
-          <p>Min: 10</p>
-          <p>Wind: 23mph</p>
-          <p>humi: 60%</p>
-        </div>        
-        <div class="daily-card">
-          <p>Monday</p>
-          <img src="http://openweathermap.org/img/wn/10d@2x.png">
-          <p>Max: 25</p>
-          <p>Min: 10</p>
-          <p>Wind: 23mph</p>
-          <p>humi: 60%</p>
-        </div>
-
-      </div>
-
+      </section>
     </main>
 
 <!---
