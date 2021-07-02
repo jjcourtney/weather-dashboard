@@ -1,0 +1,67 @@
+:root {
+    font-family: 'Nunito Sans', sans-serif;
+    --hot: red;
+    --warm: orange;
+    --cool: lightblue;
+    --cold: blue;
+}
+#main-card,
+.daily-card{
+    background-color: rgb(255, 255, 255);
+    box-shadow: 5px 5px 5px rgb(143, 143, 143);
+    border: 1px solid rgb(143, 143, 143);
+    padding: 5px;
+    border-radius: 15px;
+    text-align: center;
+    background-image: linear-gradient(180deg, var(--warm), var(--cool));
+}
+
+#container-daily-cards {
+    display: grid;
+    grid-template-columns: 15% 15% 15% 15% 15%;
+    column-gap: 3%;
+    justify-content: center;
+
+}
+#todays-info {
+    display: grid;
+    grid-template-columns: 25% 25% 25%;
+    grid-template-rows: 45% 45%;
+    justify-content: center;
+    align-items: center;
+
+
+}
+#main-card span, #main-card img{
+    padding: 5px;
+
+}
+#todays-day{
+    text-align: center;
+}
+
+#main-card{
+    margin-bottom: 10px;
+    width: 87%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+header {
+    text-align: center;
+}
+
+main{
+    display: grid;
+    grid-template-rows: 40% 10% 45%;
+}
+
+.five-day{
+    text-align: center;
+}
+
+span {
+    box-shadow: 2px 2px 5px rgba(119, 136, 153, 0.397);
+    border-radius: 5px;
+
+}

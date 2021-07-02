@@ -4,7 +4,9 @@ let lon = "-94.04";
 let lat = "33.44";
 
 let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+
 let kevlinToCelsius = tempKel => tempKel - 273.15; // -273.15 kelvin = 0 deg cel
+
 
 
 fetch(url)
@@ -16,7 +18,6 @@ fetch(url)
     console.log(data.daily[i]);
     }
 })
-
 
 
 

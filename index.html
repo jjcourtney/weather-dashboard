@@ -1,20 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>Jon's weather forcast</title>
 </head>
 <body>
+    <header>
+      <h1>Welcome to Jon's weather forcast</h1>
+      <div>Serch for you town</div>
+    </header>
     <main id="main">
+      
+
+
+      <div id="main-card">
+        <div id="todays-day">Monday</div>
+        <div id="todays-info">
+          <div><img src="http://openweathermap.org/img/wn/10d@2x.png"></div>
+          <span id="today-max">Max: 25</span>
+          <span id="today-min">Min: 10</span>
+          <span id="today-wind">Wind: 23mph</span>
+          <span id="today-humidity">humi: 60%</span>
+          <span id="today-uv">UV: High</span>
+
+        </div>
+      </div>
+      <div class="five-day">
+        5 day forcast
+      </div>
+      <div id="container-daily-cards">
+        <div class="daily-card">
+          <p>Monday</p>
+          <img src="http://openweathermap.org/img/wn/10d@2x.png">
+          <p>Max: 25</p>
+          <p>Min: 10</p>
+          <p>Wind: 23mph</p>
+          <p>humi: 60%</p>
+        </div>        
+        <div class="daily-card">
+          <p>Monday</p>
+          <img src="http://openweathermap.org/img/wn/10d@2x.png">
+          <p>Max: 25</p>
+          <p>Min: 10</p>
+          <p>Wind: 23mph</p>
+          <p>humi: 60%</p>
+
+        </div>        
+        <div class="daily-card">
+          <p>Monday</p>
+          <img src="http://openweathermap.org/img/wn/10d@2x.png">
+          <p>Max: 25</p>
+          <p>Min: 10</p>
+          <p>Wind: 23mph</p>
+          <p>humi: 60%</p>
+        </div>        
+        <div class="daily-card">
+          <p>Monday</p>
+          <img src="http://openweathermap.org/img/wn/10d@2x.png">
+          <p>Max: 25</p>
+          <p>Min: 10</p>
+          <p>Wind: 23mph</p>
+          <p>humi: 60%</p>
+        </div>        
+        <div class="daily-card">
+          <p>Monday</p>
+          <img src="http://openweathermap.org/img/wn/10d@2x.png">
+          <p>Max: 25</p>
+          <p>Min: 10</p>
+          <p>Wind: 23mph</p>
+          <p>humi: 60%</p>
+        </div>
+
+      </div>
 
     </main>
-    
-    <script
-  src="https://code.jquery.com/jquery-3.6.0.js"
-  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-  crossorigin="anonymous"></script>
-    <script src="./assets/js/script.js"></script>
+
+<!---
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script src="./assets/js/script.js"></script>
+  -->
 </body>
 </html>
