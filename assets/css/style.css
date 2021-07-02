@@ -7,9 +7,11 @@
     --shadow-border :rgb(143, 143, 143);
     background-color: lightskyblue;
 }
+
 h1{
     font-size: 3rem;
 }
+
 .five-day,
 #search-btn,
 #main-card,
@@ -28,7 +30,6 @@ h1{
     grid-template-columns: 15% 15% 15% 15% 15%;
     column-gap: 3%;
     justify-content: center;
-
 }
 #todays-info {
     display: grid;
@@ -36,14 +37,13 @@ h1{
     grid-template-rows: 45% 45%;
     justify-content: center;
     align-items: center;
-
-
 }
 #main-card span, #main-card img{
     padding: 5px;
 
 }
-#todays-day{
+
+#todays-day {
     text-align: center;
 }
 
@@ -58,12 +58,12 @@ header {
     text-align: center;
 }
 
-.weather-display{
+.weather-display {
     display: grid;
     grid-template-rows: 40% 10% 45%;
 }
 
-.five-day{
+.five-day {
     text-align: center;
     width: 87%;
     margin-left: auto;
@@ -154,7 +154,6 @@ header {
 }
 
 .prev-searched{
-    
     background-color: var(--cool);
     margin: 3px;
     margin-bottom: 5px;
