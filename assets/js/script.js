@@ -3,20 +3,19 @@ let mainEl = $("#main")
 let lat = "52.5";
 let lon = "-1.95";
 
-
-//&exclude=hourly,mint
-
-
 let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&exclude=hourly`;
 
 let kevlinToCelsius = tempKel => tempKel - 273.15; // -273.15 kelvin = 0 deg cel
 
-const searchCity = () => {
+const searchCity = (city) => {
     $.getJSON("./assets/js/citylist.json", json => {
-        let arr = json.filter(a => a.name == "Birmingham")
-            for (i in arr){
-                console.log(arr[i].coord.lon, arr[i].coord.lat)
+        let arrCity = json.filter(city => city.name == city)
+            if (arrCity)
+            for (i in arrCity){
+                console.log(arrCity[i].coord.lon, arrCity[i].coord.lat)
 
+            }else{
+                console.log("Enter a valid city")
             }
         })
 
@@ -63,7 +62,6 @@ const intToMonth = monthAsInt => {
     }
     return month ;
 }
-
 
 const intToDay = dayAsInt => {
     let day = "Weather";
@@ -121,7 +119,7 @@ const updateFiveDay = (daysData) => {
 const updateToday = (todayData) => {
     
     let max = Math.round(kevlinToCelsius(todayData.temp.max));
-    let min = Math.round(kevlinToCelsius(todayData.temp.max));
+    let min = Math.round(kevlinToCelsius(todayData.temp.min));
     let wind = todayData.wind_speed;
     let humidity = todayData.humidity;
     let iconSrc = todayData.weather[0].icon;
@@ -169,7 +167,16 @@ const getDataThenPopulatePage = () => {
 
 
 
+
+
 getDataThenPopulatePage();
+
+$("#search-btn").click(event => { 
+    event.preventDefault();
+    let city = $("#search-btn").sibling("input").value;
+    searchCity(city)
+
+});
 /*
 weather:
 Thunderstorm
