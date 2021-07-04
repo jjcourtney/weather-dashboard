@@ -174,7 +174,7 @@ getDataThenPopulatePage();
 $("#search-btn").click(event => { 
     event.preventDefault();
     
-    city = "Birmingham"/*$("#search-btn").siblings("input")[0].value*/;
+    city = $("#search-btn").siblings("input")[0].value;
     console.log($("#search-btn").siblings("input")[0].value)
 
     searchCity()
