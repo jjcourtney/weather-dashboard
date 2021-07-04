@@ -12,7 +12,12 @@ let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}
 let kevlinToCelsius = tempKel => tempKel - 273.15; // -273.15 kelvin = 0 deg cel
 
 $.getJSON("./assets/js/citylist.json", json => {
-    console.log(json.filter(a => a.name == "Birmingham"));
+    json.filter(a => a.name == "Birmingham").then(arr => {
+        for (i in arr){
+            console.log([arr[i]])
+        }
+    })
+
 
 })
 // fetch(url)
