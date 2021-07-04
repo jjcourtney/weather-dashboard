@@ -140,6 +140,14 @@ const updateToday = (todayData) => {
     console.log($("#today-humidity"))
     $("#today-uv")[0].textContent = `UV: ${uv}`;
     $("#todays-date")[0].textContent = `${day}, ${dayMonth} ${month}`;
+  
+    if (uv < 3){
+        $("#today-uv").removeClass("moderate-uv severe-uv").addClass("favorable-uv");
+    }else if (uv < 6){
+        $("#today-uv").removeClass("favorable-uv severe-uv").addClass("moderate-uv");
+    }else{
+        $("#today-uv").removeClass("favorable-uv moderate-uv").addClass("severe-uv");
+    }
 
     
 }
