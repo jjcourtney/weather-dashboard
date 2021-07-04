@@ -164,3 +164,7 @@ header {
 #todays-date{
     font-size: 1.5rem;
 }
+
+.weather-img{
+    max-width: 80%;
+}
