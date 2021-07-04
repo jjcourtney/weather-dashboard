@@ -1,34 +1,69 @@
 const apiKey = "31b1715eea27e8546c5192709d456eb7";
 let mainEl = $("#main")
-let lon = "-94.04";
-let lat = "33.44";
-let cityName = "Nurabad"
+let lat = "52.5";
+let lon = "-1.95";
+
 
 //&exclude=hourly,mint
-// let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}}`
 
-let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+
+let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&exclude=hourly`;
 
 let kevlinToCelsius = tempKel => tempKel - 273.15; // -273.15 kelvin = 0 deg cel
 
-$.getJSON("./assets/js/citylist.json", json => {
-    let arr = json.filter(a => a.name == "Birmingham")
-           for (i in arr){
-            console.log(arr[i].coord.lon, arr[i].coord.lat)
+const searchCity = () => {
+    $.getJSON("./assets/js/citylist.json", json => {
+        let arr = json.filter(a => a.name == "Birmingham")
+            for (i in arr){
+                console.log(arr[i].coord.lon, arr[i].coord.lat)
 
-        }
-    })
+            }
+        })
 
+}
 
+const intToMonth = monthAsInt => {
+    let month = "";
+    switch(monthAsInt){
+        case 0:
+            month  = "January";
+            break;
+        case 1:
+            month  = "Febuary";
+            break;
+        case 2:
+            month  = "March";
+            break;
+        case 3:
+            month  = "April";
+            break;
+        case 4:
+            month  = "May";
+            break;
+        case 5:
+            month  = "June";
+            break;
+        case 6:
+            month  = "July";
+            break;
+        case 7:
+            month  = "August";
+            break;
+        case 8:
+            month  = "September";
+            break;
+        case 9:
+            month  = "October";
+            break;
+        case 10:
+            month  = "Novemeber";
+            break;
+        case 11:
+            month  = "December";
+    }
+    return month ;
+}
 
-// fetch(url)
-// .then(reponse => reponse.json())
-// .then(data => {
-
-//     updateFiveDay(data.daily);
-//     console.log(data.daily)
-    
-// })
 
 const intToDay = dayAsInt => {
     let day = "Weather";
@@ -82,11 +117,51 @@ const updateFiveDay = (daysData) => {
         
     }
 }
- 
-const createToday = () => {
 
+const updateToday = (todayData) => {
+    
+    let max = Math.round(kevlinToCelsius(todayData.temp.max));
+    let min = Math.round(kevlinToCelsius(todayData.temp.max));
+    let wind = todayData.wind_speed;
+    let humidity = todayData.humidity;
+    let iconSrc = todayData.weather[0].icon;
+    let date = new Date(todayData.dt * 1000);
+
+    let uv = todayData.uvi 
+    let day = intToDay(date.getDay())
+    let dayMonth = date.getDate();
+    let month = intToMonth(date.getMonth())
+
+    $("#today-max")[0].textContent = `Max: ${max}°C`
+    $("#today-min")[0].textContent = `Min: ${min}°C`
+    $("#today-wind")[0].textContent = `Wind: ${wind}mph`
+    $("#today-humidity")[0].textContent = `Humidity: ${humidity}%`;
+    $("#today-img")[0].src = `http://openweathermap.org/img/wn/${iconSrc}@2x.png`;
+    console.log($("#today-humidity"))
+    $("#today-uv")[0].textContent = `UV: ${uv}`;
+    $("#todays-date")[0].textContent = `${day}, ${dayMonth} ${month}`;
+
+    
 }
 
+const getDataThenPopulatePage = () => {
+
+    fetch(url)
+    .then(reponse => reponse.json())
+    .then(data => {
+
+        updateFiveDay(data.daily);
+        updateToday(data.daily[0]);
+        console.log(data.daily[0])
+
+        // createToday(data.daily[0]);
+        
+    })
+}
+
+
+
+getDataThenPopulatePage();
 /*
 weather:
 Thunderstorm
