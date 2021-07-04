@@ -10,7 +10,7 @@ let kevlinToCelsius = tempKel => tempKel - 273.15; // -273.15 kelvin = 0 deg cel
 const searchCity = () => {
     $.getJSON("./assets/js/citylist.json", json => {
         let arrCity = json.filter(city => city.name == city)
-            if (arrCity)
+            if (arrCity.length>0)
             for (i in arrCity){
                 console.log(arrCity[i].coord.lon, arrCity[i].coord.lat)
 
