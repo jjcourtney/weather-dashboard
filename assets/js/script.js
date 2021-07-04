@@ -20,7 +20,7 @@ $.getJSON("./assets/js/citylist.json", json => {
     })
 
 
-})
+
 // fetch(url)
 // .then(reponse => reponse.json())
 // .then(data => {
