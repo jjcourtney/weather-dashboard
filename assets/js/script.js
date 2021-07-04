@@ -173,7 +173,7 @@ getDataThenPopulatePage();
 
 $("#search-btn").click(event => { 
     event.preventDefault();
-    let city = $("#search-btn").sibling("input").value;
+    let city = $("#search-btn").siblings("input")[0].value;
     searchCity(city)
 
 });
