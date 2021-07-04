@@ -4,10 +4,10 @@ let lat = "52.5";
 let lon = "-1.95";
 
 let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&exclude=hourly`;
-
+let city;
 let kevlinToCelsius = tempKel => tempKel - 273.15; // -273.15 kelvin = 0 deg cel
 
-const searchCity = (city) => {
+const searchCity = () => {
     $.getJSON("./assets/js/citylist.json", json => {
         let arrCity = json.filter(city => city.name.toLowerCase() == city.toLowerCase())
             if (arrCity)
@@ -173,8 +173,10 @@ getDataThenPopulatePage();
 
 $("#search-btn").click(event => { 
     event.preventDefault();
-    let city = $("#search-btn").siblings("input")[0].value;
-    searchCity(city)
+    
+    city = $("#search-btn").siblings("input")[0].value;
+
+    searchCity()
 
 });
 /*
