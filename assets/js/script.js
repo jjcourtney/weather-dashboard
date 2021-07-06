@@ -4,24 +4,26 @@ let lat = "52.5";
 let lon = "-1.95";
 
 let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&exclude=hourly`;
-let cityName;
+let cityName = "";
 let kevlinToCelsius = tempKel => tempKel - 273.15; // -273.15 kelvin = 0 deg cel
 
 const searchCity = () => {
-    $.getJSON("./assets/js/citylist.json", json => {
-        let arrCity = json.filter(city => city.name == cityName)
-            if (arrCity.length > 0){
-            for (i in arrCity){
+
+        let arrCity = cities.filter(city => city.name == cityName);
+           
+        if (arrCity.length > 0){
+            
+            
+                for (i in arrCity){
                 console.log(arrCity[i].coord.lon, arrCity[i].coord.lat)
             }
 
             }else{
                 console.log("Enter a valid city")
             }
-        })
+}     
 
-}
-
+// returns string reprenting the month from interger
 const intToMonth = monthAsInt => {
     let month = "";
     switch(monthAsInt){
@@ -63,7 +65,7 @@ const intToMonth = monthAsInt => {
     }
     return month ;
 }
-
+// returns string reprenting the day from interger
 const intToDay = dayAsInt => {
     let day = "Weather";
     switch(dayAsInt){
@@ -95,16 +97,16 @@ const intToDay = dayAsInt => {
 const updateFiveDay = (daysData) => {
     for (let i = 0; i < 5; i++){
       
-        let currentDiv = $(`div[data-fiveday="${i}"]`)[0];
+        const currentDiv = $(`div[data-fiveday="${i}"]`)[0];
 
-        let currentMax = Math.round(kevlinToCelsius(daysData[i].temp.max));
-        let currentMin = Math.round(kevlinToCelsius(daysData[i].temp.min));
-        let currentWind = daysData[i].wind_speed;
-        let currentHumidity = daysData[i].humidity;
-        let currentIcon = daysData[i].weather[0].icon;
-        let currentIconSrc = `http://openweathermap.org/img/wn/${currentIcon}@2x.png`;
-        let date = new Date(daysData[i].dt * 1000);
-        let day = intToDay(date.getDay())
+        const currentMax = Math.round(kevlinToCelsius(daysData[i].temp.max));
+        const currentMin = Math.round(kevlinToCelsius(daysData[i].temp.min));
+        const currentWind = daysData[i].wind_speed;
+        const currentHumidity = daysData[i].humidity;
+        const currentIcon = daysData[i].weather[0].icon;
+        const currentIconSrc = `http://openweathermap.org/img/wn/${currentIcon}@2x.png`;
+        const date = new Date(daysData[i].dt * 1000);
+        const day = intToDay(date.getDay())
 
         $(currentDiv).children(".max")[0].textContent = `Max: ${currentMax}°C`
         $(currentDiv).children(".min")[0].textContent = `Min: ${currentMin}°C`
@@ -119,17 +121,18 @@ const updateFiveDay = (daysData) => {
 
 const updateToday = (todayData) => {
     
-    let max = Math.round(kevlinToCelsius(todayData.temp.max));
-    let min = Math.round(kevlinToCelsius(todayData.temp.min));
-    let wind = todayData.wind_speed;
-    let humidity = todayData.humidity;
-    let iconSrc = todayData.weather[0].icon;
-    let date = new Date(todayData.dt * 1000);
+    // 
+    const max = Math.round(kevlinToCelsius(todayData.temp.max));
+    const min = Math.round(kevlinToCelsius(todayData.temp.min));
+    const wind = todayData.wind_speed;
+    const humidity = todayData.humidity;
+    const iconSrc = todayData.weather[0].icon;
+    const date = new Date(todayData.dt * 1000);
 
-    let uv = todayData.uvi 
-    let day = intToDay(date.getDay())
-    let dayMonth = date.getDate();
-    let month = intToMonth(date.getMonth())
+    const uv = todayData.uvi 
+    const day = intToDay(date.getDay())
+    const dayMonth = date.getDate();
+    const month = intToMonth(date.getMonth())
 
     $("#today-max")[0].textContent = `Max: ${max}°C`
     $("#today-min")[0].textContent = `Min: ${min}°C`
