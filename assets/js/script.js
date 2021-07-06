@@ -119,6 +119,7 @@ const updateFiveDay = (daysData) => {
     }
 }
 
+// updates todays forcase card
 const updateToday = (todayData) => {
     
     // 
@@ -154,6 +155,7 @@ const updateToday = (todayData) => {
     
 }
 
+// fetch json from API and calls functions to populate the DOM
 const getDataThenPopulatePage = () => {
 
     fetch(url)
@@ -169,12 +171,9 @@ const getDataThenPopulatePage = () => {
     })
 }
 
+getDataThenPopulatePage(); // call function to populate on load
 
-
-
-
-getDataThenPopulatePage();
-
+// create event listerner for the search button
 $("#search-btn").click(event => { 
     event.preventDefault();
     
