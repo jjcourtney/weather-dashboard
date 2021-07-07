@@ -4,23 +4,63 @@ let lat = "52.5";
 let lon = "-1.95";
 
 let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&exclude=hourly`;
-let cityName = "";
+let cityName = "Birmingham";
 let kevlinToCelsius = tempKel => tempKel - 273.15; // -273.15 kelvin = 0 deg cel
+const searchBtn = $("#search-btn");
+const searchDiv = $("#search");
+const selectorDiv = $("#selector");
+
+const getEndPoint = (cityLat, cityLon) => {
+    let endpoint = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&appid=${apiKey}&exclude=hourly`;
+    return endpoint;
+}
+
+const loadNewData = event => {
+
+    const cityLon = $(event.target).data("city-lon");
+    const cityLat = $(event.target).data("city-lat");
+
+    getDataThenPopulatePage(getEndPoint(cityLat, cityLon));
+    
+    selectorDiv.removeClass("selector-visible").addClass("selector-hidden")
+
+    selectorDiv.empty();
+}
+
+
+const showCitiesFound = currentCity => {
+
+    const cityId = currentCity.id;
+    const cityLon = currentCity.coord.lon;
+    const cityLat = currentCity.coord.lat;
+    const cityName = currentCity.name;
+    const cityCountry = currentCity.country;
+
+    selectorDiv.removeClass("selector-hidden").addClass("selector-visible")
+    selectorDiv.append($(`<span>${cityName}, ${cityCountry}</span><br>`)
+    .attr("data-city-lon", `${cityLon}`)
+    .attr("data-city-lat", `${cityLat}`)
+    .on("click", loadNewData));
+}
 
 const searchCity = () => {
-
-        let arrCity = cities.filter(city => city.name == cityName);
+        selectorDiv.empty();
+        const arrCity = cities.filter(city => city.name == cityName);
            
         if (arrCity.length > 0){
-            
-            
-                for (i in arrCity){
-                console.log(arrCity[i].coord.lon, arrCity[i].coord.lat)
+            for (i in arrCity){
+                showCitiesFound (arrCity[i]);
             }
+        }else{
+            
+            selectorDiv.removeClass("selector-hidden").addClass("selector-visible")
+            selectorDiv.append($(`<p>City not found, Please search again</p>`));
+            selectorDiv.on("click", () => {
+                selectorDiv.empty();
+                selectorDiv.removeClass("selector-visible").addClass("selector-hidden");
 
-            }else{
-                console.log("Enter a valid city")
-            }
+            })
+        }
 }     
 
 // returns string reprenting the month from interger
@@ -94,7 +134,7 @@ const intToDay = dayAsInt => {
 }
 
 // updates 5 day forcast cards with data
-const updateFiveDay = (daysData) => {
+const updateFiveDay = daysData => {
     for (let i = 0; i < 5; i++){
       
         const currentDiv = $(`div[data-fiveday="${i}"]`)[0];
@@ -120,7 +160,7 @@ const updateFiveDay = (daysData) => {
 }
 
 // updates todays forcase card
-const updateToday = (todayData) => {
+const updateToday = todayData => {
     
     // 
     const max = Math.round(kevlinToCelsius(todayData.temp.max));
@@ -128,21 +168,25 @@ const updateToday = (todayData) => {
     const wind = todayData.wind_speed;
     const humidity = todayData.humidity;
     const iconSrc = todayData.weather[0].icon;
+    
+    
+    const uv = todayData.uvi;
+
+    // Getting today as a day, DoM and month
     const date = new Date(todayData.dt * 1000);
+    const day = intToDay(date.getDay());
+    const dayMonth = date.getDate();;
+    const month = intToMonth(date.getMonth());
 
-    const uv = todayData.uvi 
-    const day = intToDay(date.getDay())
-    const dayMonth = date.getDate();
-    const month = intToMonth(date.getMonth())
-
-    $("#today-max")[0].textContent = `Max: ${max}°C`
-    $("#today-min")[0].textContent = `Min: ${min}°C`
-    $("#today-wind")[0].textContent = `Wind: ${wind}mph`
+    $("#today-max")[0].textContent = `Max: ${max}°C`;
+    $("#today-min")[0].textContent = `Min: ${min}°C`;
+    $("#today-wind")[0].textContent = `Wind: ${wind}mph`;
     $("#today-humidity")[0].textContent = `Humidity: ${humidity}%`;
     $("#today-img")[0].src = `http://openweathermap.org/img/wn/${iconSrc}@2x.png`;
-    console.log($("#today-humidity"))
+
     $("#today-uv")[0].textContent = `UV: ${uv}`;
     $("#todays-date")[0].textContent = `${day}, ${dayMonth} ${month}`;
+    $("#city-name")[0].textContent = `${cityName}`;
   
     if (uv < 3){
         $("#today-uv").removeClass("moderate-uv severe-uv").addClass("favorable-uv");
@@ -156,9 +200,9 @@ const updateToday = (todayData) => {
 }
 
 // fetch json from API and calls functions to populate the DOM
-const getDataThenPopulatePage = () => {
+const getDataThenPopulatePage = (givenUrl = url) => {
 
-    fetch(url)
+    fetch(givenUrl)
     .then(reponse => reponse.json())
     .then(data => {
 
@@ -174,7 +218,7 @@ const getDataThenPopulatePage = () => {
 getDataThenPopulatePage(); // call function to populate on load
 
 // create event listerner for the search button
-$("#search-btn").click(event => { 
+searchBtn.click(event => { 
     event.preventDefault();
     
     cityName = $("#search-btn").siblings("input")[0].value;
@@ -183,10 +227,4 @@ $("#search-btn").click(event => {
     searchCity()
 
 });
-/*
-weather:
-Thunderstorm
-Drizzle
-	Rain
-    	Snow
-*/
+ 
