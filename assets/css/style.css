@@ -179,6 +179,7 @@ header {
     border-radius: 10px;
     border: 5px solid var(--cool);
     box-shadow: 5px 5px 5px lightgray;
+    min-width : 80%;
 
 }
 .selector-visible > * {

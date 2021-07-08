@@ -14,11 +14,13 @@ const selectorDiv = $("#selector");
 
 const showFoundCities = () => {
     selectorDiv.removeClass("selector-hidden").addClass("selector-visible");
+    $("#search").css({'display': 'none'});
     }
-
+    
 const clearAndHideFoundCities = () => {
     selectorDiv.empty();
     selectorDiv.removeClass("selector-visible").addClass("selector-hidden");
+    $("#search").css({'display': 'flex'});
 }
 
 const getEndPoint = (cityLat, cityLon) => {
@@ -26,6 +28,7 @@ const getEndPoint = (cityLat, cityLon) => {
     return endpoint;
 }
 
+// load new data by getting from new endpoint
 const loadNewData = event => {
 
     const cityLon = $(event.target).data("city-lon");
@@ -34,9 +37,9 @@ const loadNewData = event => {
     getDataThenPopulatePage(getEndPoint(cityLat, cityLon));
     
     clearAndHideFoundCities();
-
 }
 
+// displays cities in a div and makes them selectable
 const showCitiesFound = currentCity => {
 
     const cityId = currentCity.id;
@@ -51,9 +54,19 @@ const showCitiesFound = currentCity => {
     .attr("data-city-lon", `${cityLon}`)
     .attr("data-city-lat", `${cityLat}`)
     .on("click", loadNewData));
+
+    // cityObj = {country : cityCountry,
+    //     lon : cityLon,
+    //     lat : cityLat,
+    //     name : cityName,
+    //     id : cityId
+    // }
+
+    // localStorage.setItem("city", JSON.stringify(cityObj))
+    
 }
 
-// uses 
+// uses cities object to find matching cities
 const searchCity = () => {
         selectorDiv.empty();
         const arrCity = cities.filter(city => city.name == cityName);
