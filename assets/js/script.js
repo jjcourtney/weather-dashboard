@@ -193,6 +193,7 @@ const updateToday = todayData => {
     $("#today-img")[0].src = `http://openweathermap.org/img/wn/${iconSrc}@2x.png`;
     $("#city-name")[0].textContent = `${cityName}`;
     $("#today-uv")[0].textContent = `UV: ${uv}`;
+    console.log(day, dayMonth, month)
     $("#todays-date")[0].textContent = `${day}, ${dayMonth} ${month}`;
  
   
