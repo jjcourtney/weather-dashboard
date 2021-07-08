@@ -10,6 +10,17 @@ const searchBtn = $("#search-btn");
 const searchDiv = $("#search");
 const selectorDiv = $("#selector");
 
+
+
+const showFoundCities = () => {
+    selectorDiv.removeClass("selector-hidden").addClass("selector-visible");
+    }
+
+const clearAndHideFoundCities = () => {
+    selectorDiv.empty();
+    selectorDiv.removeClass("selector-visible").addClass("selector-hidden");
+}
+
 const getEndPoint = (cityLat, cityLon) => {
     let endpoint = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&appid=${apiKey}&exclude=hourly`;
     return endpoint;
@@ -22,11 +33,9 @@ const loadNewData = event => {
 
     getDataThenPopulatePage(getEndPoint(cityLat, cityLon));
     
-    selectorDiv.removeClass("selector-visible").addClass("selector-hidden")
+    clearAndHideFoundCities();
 
-    selectorDiv.empty();
 }
-
 
 const showCitiesFound = currentCity => {
 
@@ -36,30 +45,28 @@ const showCitiesFound = currentCity => {
     const cityName = currentCity.name;
     const cityCountry = currentCity.country;
 
-    selectorDiv.removeClass("selector-hidden").addClass("selector-visible")
+    showFoundCities();
+
     selectorDiv.append($(`<span>${cityName}, ${cityCountry}</span><br>`)
     .attr("data-city-lon", `${cityLon}`)
     .attr("data-city-lat", `${cityLat}`)
     .on("click", loadNewData));
 }
 
+// uses 
 const searchCity = () => {
         selectorDiv.empty();
         const arrCity = cities.filter(city => city.name == cityName);
            
         if (arrCity.length > 0){
             for (i in arrCity){
-                showCitiesFound (arrCity[i]);
+                showCitiesFound(arrCity[i]);
             }
         }else{
-            
-            selectorDiv.removeClass("selector-hidden").addClass("selector-visible")
-            selectorDiv.append($(`<p>City not found, Please search again</p>`));
-            selectorDiv.on("click", () => {
-                selectorDiv.empty();
-                selectorDiv.removeClass("selector-visible").addClass("selector-hidden");
+            showFoundCities();
 
-            })
+            selectorDiv.append($(`<p>City not found, Please search again</p>`));
+            selectorDiv.on("click", clearAndHideFoundCities);
         }
 }     
 
@@ -133,7 +140,7 @@ const intToDay = dayAsInt => {
     return day;
 }
 
-// updates 5 day forcast cards with data
+// updates 5 day forecast cards with data
 const updateFiveDay = daysData => {
     for (let i = 0; i < 5; i++){
       
@@ -159,7 +166,7 @@ const updateFiveDay = daysData => {
     }
 }
 
-// updates todays forcase card
+// updates todays forecast card
 const updateToday = todayData => {
     
     // 
@@ -168,14 +175,15 @@ const updateToday = todayData => {
     const wind = todayData.wind_speed;
     const humidity = todayData.humidity;
     const iconSrc = todayData.weather[0].icon;
-    
+  
     
     const uv = todayData.uvi;
 
     // Getting today as a day, DoM and month
     const date = new Date(todayData.dt * 1000);
+    
     const day = intToDay(date.getDay());
-    const dayMonth = date.getDate();;
+    const dayMonth = date.getDate();
     const month = intToMonth(date.getMonth());
 
     $("#today-max")[0].textContent = `Max: ${max}°C`;
@@ -183,10 +191,10 @@ const updateToday = todayData => {
     $("#today-wind")[0].textContent = `Wind: ${wind}mph`;
     $("#today-humidity")[0].textContent = `Humidity: ${humidity}%`;
     $("#today-img")[0].src = `http://openweathermap.org/img/wn/${iconSrc}@2x.png`;
-
+    $("#city-name")[0].textContent = `${cityName}`;
     $("#today-uv")[0].textContent = `UV: ${uv}`;
     $("#todays-date")[0].textContent = `${day}, ${dayMonth} ${month}`;
-    $("#city-name")[0].textContent = `${cityName}`;
+ 
   
     if (uv < 3){
         $("#today-uv").removeClass("moderate-uv severe-uv").addClass("favorable-uv");
@@ -208,9 +216,6 @@ const getDataThenPopulatePage = (givenUrl = url) => {
 
         updateFiveDay(data.daily);
         updateToday(data.daily[0]);
-        console.log(data.daily[0])
-
-        // createToday(data.daily[0]);
         
     })
 }
