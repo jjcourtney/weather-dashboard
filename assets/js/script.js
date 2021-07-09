@@ -94,6 +94,7 @@ const clearAndHideFoundCities = () => {
     $("#search-btn").siblings("input")[0].value = "";
 }
 
+
 const getEndPoint = (cityLat, cityLon) => {
     let endpoint = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&appid=${apiKey}&exclude=hourly`;
     return endpoint;
@@ -149,7 +150,7 @@ const searchCity = () => {
         selectorDiv.empty();
         const arrCity = cities.filter(city => city.name == cityName);
            
-        if (arrCity.length > 0){
+        if (arrCity.length > 0 && cityName != ""){
             for (i in arrCity){
                 showCitiesFound(arrCity[i]);
             }
@@ -322,9 +323,12 @@ getDataThenPopulatePage(); // call function to populate on load
 // create event listerner for the search button
 searchBtn.click(event => { 
     event.preventDefault();
-    
-    cityName = $("#search-btn").siblings("input")[0].value;
-    console.log($("#search-btn").siblings("input")[0].value)
+   
+    // Ensure correct formatting of search string
+    let tmpCityName = $("#search-btn").siblings("input")[0].value;
+    tmpCityName = tmpCityName.trim();
+    tmpCityName = tmpCityName.toLowerCase();
+    cityName = tmpCityName[0].toUpperCase() + tmpCityName.slice(1);
 
     searchCity()
 
