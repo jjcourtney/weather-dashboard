@@ -102,21 +102,22 @@ const getEndPoint = (cityLat, cityLon) => {
 // load new data by getting from new endpoint
 const loadNewData = event => {
 
-    const cityLon = $(event.target).data("city-lon");
-    const cityLat = $(event.target).data("city-lat");
-    const cityName = $(event.target).data("city-name");
-    const cityCountry = $(event.target).data("city-country");
-    const cityId = $(event.target).data("city-id");
+    const curCityLon = $(event.target).data("city-lon");
+    const curCityLat = $(event.target).data("city-lat");
+    const curCityName = $(event.target).data("city-name");
+    cityName = curCityName;
+    const curCityCountry = $(event.target).data("city-country");
+    const curCityId = $(event.target).data("city-id");
 
-    getDataThenPopulatePage(getEndPoint(cityLat, cityLon));
+    getDataThenPopulatePage(getEndPoint(curCityLat, curCityLon));
     
     clearAndHideFoundCities();
     currentCityObj = {
-    "cityLat" : cityLat,
-    "cityLon" : cityLon,
-    "cityName" : cityName,
-    "cityCountry" : cityCountry,
-    "cityId" : cityId 
+    "cityLat" : curCityLat,
+    "cityLon" : curCityLon,
+    "cityName" : curCityName,
+    "cityCountry" : curCityCountry,
+    "cityId" : curCityId 
     };
 
     addToLocalStorage(currentCityObj);
