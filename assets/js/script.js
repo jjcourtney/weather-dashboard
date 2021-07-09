@@ -10,8 +10,25 @@ const searchBtn = $("#search-btn");
 const searchDiv = $("#search");
 const selectorDiv = $("#selector");
 const prevSearchDiv = $("#previous-searches");
+let firstLoad = true;
 
 
+
+const populatePreviouslySearched = () => {
+    let prevCitiesArr = getCitiesFromLocalStorage();
+    for (i in prevCitiesArr) {
+
+        const currentCityObj = {
+        "cityLat" : prevCitiesArr[i].cityLat,
+        "cityLon" : prevCitiesArr[i].cityLon,
+        "cityName" : prevCitiesArr[i].cityName,
+        "cityCountry" : prevCitiesArr[i].cityCountry,
+        "cityId" : prevCitiesArr[i].cityId 
+        };
+    
+        addToPreviouslySearched(currentCityObj);
+    }
+}
 
 const clearPreviouslySearched = () => {
     window.localStorage.setItem("prevCities", "[]");
@@ -33,17 +50,17 @@ const addToPreviouslySearched = currentCityObj => {
     .attr("data-city-name", `${cityName}`)
     .attr("data-city-country", `${cityCountry}`)
     .attr("data-city-id", `${cityId}`)
-
     .attr("class", "prev-searched")
     .on("click", loadNewData));
 }
 
 const addToLocalStorage = cityToAdd => {
+
     console.log(getCitiesFromLocalStorage())
-     let prevCitiesArr = getCitiesFromLocalStorage();
-     prevCitiesArr.push(cityToAdd);
-     prevCitiesStr = JSON.stringify(prevCitiesArr);
-     window.localStorage.setItem("prevCities", prevCitiesStr);
+    let prevCitiesArr = getCitiesFromLocalStorage();
+    prevCitiesArr.push(cityToAdd);
+    prevCitiesStr = JSON.stringify(prevCitiesArr);
+    window.localStorage.setItem("prevCities", prevCitiesStr);
 }
 
 // Retrives previous city data from local storage, sets to empty array is nothing in local storage
@@ -116,15 +133,6 @@ const showCitiesFound = currentCity => {
     .attr("data-city-id", `${cityId}`)
     .on("click", loadNewData));
 
-    // cityObj = {country : cityCountry,
-    //     lon : cityLon,
-    //     lat : cityLat,
-    //     name : cityName,
-    //     id : cityId
-    // }
-
-    // localStorage.setItem("city", JSON.stringify(cityObj))
-    
 }
 
 // uses cities object to find matching cities
@@ -291,6 +299,11 @@ const getDataThenPopulatePage = (givenUrl = url) => {
 
         updateFiveDay(data.daily);
         updateToday(data.daily[0]);
+
+        if (firstLoad){
+            populatePreviouslySearched();
+            firstLoad = false;
+        }
         
     })
 }

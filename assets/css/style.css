@@ -201,3 +201,8 @@ aside{
     justify-content: center;
     row-gap: 1rem;
 }
+
+#city-name,
+#todays-date {
+    box-shadow: none;
+}
