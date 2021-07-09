@@ -13,7 +13,7 @@ h1{
 }
 
 .five-day,
-#search-btn,
+button,
 #main-card,
 .daily-card{
     background-color: rgb(255, 255, 255);
@@ -139,11 +139,11 @@ header {
     margin-bottom: 10px;
 }
 
-#search-btn:hover{
+button:hover{
     background-image: linear-gradient(180deg, var(--cool), var(--warm));
 }
 
-#search-btn:active{
+button:active{
     color: mediumblue;
     box-shadow: none;
 
@@ -194,4 +194,10 @@ header {
 
 .selector-hidden {
     display: none;
+}
+
+aside{
+    display: grid;
+    justify-content: center;
+    row-gap: 1rem;
 }

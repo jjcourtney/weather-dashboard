@@ -12,6 +12,12 @@ const selectorDiv = $("#selector");
 const prevSearchDiv = $("#previous-searches");
 
 
+
+const clearPreviouslySearched = () => {
+    window.localStorage.setItem("prevCities", "[]");
+    $("#previous-searches").text("");
+}
+
 const addToPreviouslySearched = currentCityObj => {
     console.log("currentCityObj",currentCityObj);
     const cityLon = currentCityObj.cityLon;
@@ -302,3 +308,4 @@ searchBtn.click(event => {
 
 });
  
+$("#clear-history").on("click", clearPreviouslySearched)
