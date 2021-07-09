@@ -12,7 +12,13 @@ const selectorDiv = $("#selector");
 const prevSearchDiv = $("#previous-searches");
 let firstLoad = true;
 
-
+const isInList = (currentId = "") => {
+    if($(`[data-city-id="${currentId}"]`).length){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 const populatePreviouslySearched = () => {
     let prevCitiesArr = getCitiesFromLocalStorage();
@@ -36,13 +42,16 @@ const clearPreviouslySearched = () => {
 }
 
 const addToPreviouslySearched = currentCityObj => {
-    console.log("currentCityObj",currentCityObj);
+    
     const cityLon = currentCityObj.cityLon;
     const cityLat = currentCityObj.cityLat;
     const cityName = currentCityObj.cityName;
     const cityCountry = currentCityObj.cityCountry;
     const cityId = currentCityObj.cityId;
-
+    console.log("is in list?: ", isInList(cityId));
+    if(isInList(cityId)){
+        $(`[data-city-id="${cityId}"]`).remove();
+    }
 
     prevSearchDiv.prepend($(`<span>${cityName}, ${cityCountry}</span>`)
     .attr("data-city-lon", `${cityLon}`)
