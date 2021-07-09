@@ -48,7 +48,7 @@ const addToPreviouslySearched = currentCityObj => {
     const cityName = currentCityObj.cityName;
     const cityCountry = currentCityObj.cityCountry;
     const cityId = currentCityObj.cityId;
-    console.log("is in list?: ", isInList(cityId));
+    
     if(isInList(cityId)){
         $(`[data-city-id="${cityId}"]`).remove();
     }
@@ -65,7 +65,6 @@ const addToPreviouslySearched = currentCityObj => {
 
 const addToLocalStorage = cityToAdd => {
 
-    console.log(getCitiesFromLocalStorage())
     let prevCitiesArr = getCitiesFromLocalStorage();
     prevCitiesArr.push(cityToAdd);
     prevCitiesStr = JSON.stringify(prevCitiesArr);
@@ -278,6 +277,7 @@ const updateToday = todayData => {
     const dayMonth = date.getDate();
     const month = intToMonth(date.getMonth());
 
+    // Populating all todays information
     $("#today-max")[0].textContent = `Max: ${max}°C`;
     $("#today-min")[0].textContent = `Min: ${min}°C`;
     $("#today-wind")[0].textContent = `Wind: ${wind}mph`;
@@ -285,7 +285,6 @@ const updateToday = todayData => {
     $("#today-img")[0].src = `http://openweathermap.org/img/wn/${iconSrc}@2x.png`;
     $("#city-name")[0].textContent = `${cityName}`;
     $("#today-uv")[0].textContent = `UV: ${uv}`;
-    console.log(day, dayMonth, month)
     $("#todays-date")[0].textContent = `${day}, ${dayMonth} ${month}`;
  
   
