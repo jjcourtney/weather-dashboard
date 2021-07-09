@@ -9,8 +9,46 @@ let kevlinToCelsius = tempKel => tempKel - 273.15; // -273.15 kelvin = 0 deg cel
 const searchBtn = $("#search-btn");
 const searchDiv = $("#search");
 const selectorDiv = $("#selector");
+const prevSearchDiv = $("#previous-searches");
 
 
+const addToPreviouslySearched = currentCityObj => {
+    console.log("currentCityObj",currentCityObj);
+    const cityLon = currentCityObj.cityLon;
+    const cityLat = currentCityObj.cityLat;
+    const cityName = currentCityObj.cityName;
+    const cityCountry = currentCityObj.cityCountry;
+    const cityId = currentCityObj.cityId;
+
+
+    prevSearchDiv.prepend($(`<span>${cityName}, ${cityCountry}</span>`)
+    .attr("data-city-lon", `${cityLon}`)
+    .attr("data-city-lat", `${cityLat}`)
+    .attr("data-city-name", `${cityName}`)
+    .attr("data-city-country", `${cityCountry}`)
+    .attr("data-city-id", `${cityId}`)
+
+    .attr("class", "prev-searched")
+    .on("click", loadNewData));
+}
+
+const addToLocalStorage = cityToAdd => {
+    console.log(getCitiesFromLocalStorage())
+     let prevCitiesArr = getCitiesFromLocalStorage();
+     prevCitiesArr.push(cityToAdd);
+     prevCitiesStr = JSON.stringify(prevCitiesArr);
+     window.localStorage.setItem("prevCities", prevCitiesStr);
+}
+
+// Retrives previous city data from local storage, sets to empty array is nothing in local storage
+const getCitiesFromLocalStorage = () => {
+    prevCitiesArr = JSON.parse(window.localStorage.getItem("prevCities"));
+    if(!prevCitiesArr){
+        prevCitiesArr = [];
+    }
+    return prevCitiesArr;
+
+}
 
 const showFoundCities = () => {
     selectorDiv.removeClass("selector-hidden").addClass("selector-visible");
@@ -21,6 +59,7 @@ const clearAndHideFoundCities = () => {
     selectorDiv.empty();
     selectorDiv.removeClass("selector-visible").addClass("selector-hidden");
     $("#search").css({'display': 'flex'});
+    $("#search-btn").siblings("input")[0].value = "";
 }
 
 const getEndPoint = (cityLat, cityLon) => {
@@ -33,10 +72,23 @@ const loadNewData = event => {
 
     const cityLon = $(event.target).data("city-lon");
     const cityLat = $(event.target).data("city-lat");
+    const cityName = $(event.target).data("city-name");
+    const cityCountry = $(event.target).data("city-country");
+    const cityId = $(event.target).data("city-id");
 
     getDataThenPopulatePage(getEndPoint(cityLat, cityLon));
     
     clearAndHideFoundCities();
+    currentCityObj = {
+    "cityLat" : cityLat,
+    "cityLon" : cityLon,
+    "cityName" : cityName,
+    "cityCountry" : cityCountry,
+    "cityId" : cityId 
+    };
+
+    addToLocalStorage(currentCityObj);
+    addToPreviouslySearched(currentCityObj);
 }
 
 // displays cities in a div and makes them selectable
@@ -53,6 +105,9 @@ const showCitiesFound = currentCity => {
     selectorDiv.append($(`<span>${cityName}, ${cityCountry}</span><br>`)
     .attr("data-city-lon", `${cityLon}`)
     .attr("data-city-lat", `${cityLat}`)
+    .attr("data-city-name", `${cityName}`)
+    .attr("data-city-country", `${cityCountry}`)
+    .attr("data-city-id", `${cityId}`)
     .on("click", loadNewData));
 
     // cityObj = {country : cityCountry,

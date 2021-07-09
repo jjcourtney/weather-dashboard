@@ -83,14 +83,18 @@ main{
     justify-content: center;
 }
 
+
+
 #search-container,
 header {
+    display: relative;
     background-color: var(--warm);
     border: 1px solid var(--shadow-border);
     padding: 5px;
     border-radius: 15px;
     box-shadow: 5px 5px 5px var(--shadow-border);
     margin-bottom: 10px;
+
 
 }
 
@@ -108,9 +112,8 @@ header {
 #search-container{
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 3rem auto;
     justify-content: center;
-    align-items: center;
+    align-items: start;
 }
 
 .five-day,
@@ -171,10 +174,10 @@ header {
 
 .selector-visible {
     display: block;
-    position: static;
-    top: 50%;
-    left: 50%;
-    z-index: 99;
+    position: relative;
+    top: 0;
+    left: 0%;
+    right: 0;
     background-color: var(--warm);
     border-radius: 10px;
     border: 5px solid var(--cool);
