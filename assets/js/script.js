@@ -14,8 +14,6 @@ const searchDiv = $("#search");
 const selectorDiv = $("#selector");
 const prevSearchDiv = $("#previous-searches");
 
-
-
 const kevlinToCelsius = tempKel => tempKel - 273.15; // -273.15 kelvin = 0 deg cel
 
 const isInList = (currentId = "") => {
@@ -90,7 +88,7 @@ const getCitiesFromLocalStorage = () => {
 const showFoundCities = () => {
     selectorDiv.removeClass("selector-hidden").addClass("selector-visible");
     $("#search").css({'display': 'none'});
-    }
+}
     
 const clearAndHideFoundCities = () => {
     selectorDiv.empty();
@@ -98,7 +96,6 @@ const clearAndHideFoundCities = () => {
     $("#search").css({'display': 'flex'});
     $("#search-btn").siblings("input")[0].value = "";
 }
-
 
 const getEndPoint = (cityLat, cityLon) => {
     let endpoint = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&appid=${apiKey}&exclude=hourly`;
