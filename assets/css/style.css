@@ -164,6 +164,11 @@ button:active{
     text-align: center;
 }
 
+.prev-searched:hover {
+    background-color: var(--warm);
+    border: 3px solid var(--cool);
+}
+
 #todays-date{
     font-size: 1.5rem;
 }
