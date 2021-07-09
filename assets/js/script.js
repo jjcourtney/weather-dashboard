@@ -326,11 +326,14 @@ searchBtn.click(event => {
    
     // Ensure correct formatting of search string
     let tmpCityName = $("#search-btn").siblings("input")[0].value;
-    tmpCityName = tmpCityName.trim();
-    tmpCityName = tmpCityName.toLowerCase();
-    cityName = tmpCityName[0].toUpperCase() + tmpCityName.slice(1);
 
-    searchCity()
+    // Checks for a input with atleast one none-whitespace char
+    if(tmpCityName.trim()){
+        tmpCityName = tmpCityName.trim();
+        tmpCityName = tmpCityName.toLowerCase();
+        cityName = tmpCityName[0].toUpperCase() + tmpCityName.slice(1);
+        searchCity()
+    }
 
 });
  
